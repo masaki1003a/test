@@ -4,71 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>副作用予測グラフ</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <h1>副作用予測グラフ</h1>
-    <canvas id="predictionChart" width="400" height="200"></canvas>
-    <script>
-        async function fetchSheetData() {
-            const apiKey = 'bfe1808f79a756cf866a5bc74240dde7e9b2d690';
-            const spreadsheetId = '11YqkcXFmSK946UBuRpJw5cV_2CzEARJD1jzysDBhgpQ';
-            const range = 'Sheet1!A2:D';
-
-            const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`;
-            const response = await fetch(url);
-            const data = await response.json();
-
-            const labels = [];
-            const nauseaData = [];
-            const stomatitisData = [];
-            const constipationData = [];
-
-            data.values.forEach(row => {
-                labels.push(row[0]);
-                nauseaData.push(Number(row[1]));
-                stomatitisData.push(Number(row[2]));
-                constipationData.push(Number(row[3]));
-            });
-
-            const ctx = document.getElementById('predictionChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: '吐き気',
-                            data: nauseaData,
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1
-                        },
-                        {
-                            label: '口内炎',
-                            data: stomatitisData,
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        },
-                        {
-                            label: '便秘',
-                            data: constipationData,
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        }
-                    ]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100
-                        }
-                    }
-                }
-            });
-        }
-
-        fetchSheetData();
-    </script>
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTujjUpBbrWcR8x-Yn7tauUJ16T3h1eqe2cn0-Gx2r9y2TJhkRAM0Me4zsnKYWXGPdmV_1Hnf6qaC-j/pubchart?oid=1201693879&format=interactive" width="600" height="400"></iframe>
 </body>
 </html>
